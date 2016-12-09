@@ -13,19 +13,23 @@ public:
     const int spriteSize = 96;
     const std::string spriteFilename = "botSprite.png";
     DE2Bot();
-    DE2Bot(int somex, int somey, double someTheta);
-    void turn(double dTheta);
-    void turnTo(int newTheta);
-    void move(int dx, int dy);
-    void moveTo(int newx, int newy);
+    DE2Bot(float somex, float somey, float someTheta);
 
-    int getX();
-    int getY();
-    double getTheta();
+    float getX();
+    float getY();
+    float getTheta();
+
+    void turn(float dTheta);
+    void turnTo(float newTheta);
+    void move(float dx, float dy);
+    void moveTo(float newx, float newy);
+
+    void move(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window);
 private:
-    int x;
-    int y;
-    double theta;
+    float x;
+    float y;
+    float theta;
     sf::Sprite sprite;
     sf::Texture texture;
 

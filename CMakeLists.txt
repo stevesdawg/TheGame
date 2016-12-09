@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
 
-set(SOURCE_FILES main.cpp Game.h DE2Bot.h DE2Bot.cpp Drawable.h Movable.h)
+set(SOURCE_FILES main.cpp Game.h DE2Bot.h DE2Bot.cpp Drawable.h Movable.h Map.h Map.cpp)
 add_executable(TheGame ${SOURCE_FILES})
 
 #copy file to where my executable is

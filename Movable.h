@@ -7,5 +7,5 @@
 #include "Drawable.h"
 
 class Movable : Drawable {
-    virtual void move() =0;
+    virtual void move(sf::RenderWindow&) =0;
 };

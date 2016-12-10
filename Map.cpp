@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <math.h>
 #include "Map.h"
 
 Map::Map() {
@@ -14,7 +15,7 @@ Map::Map() {
 }
 
 void Map::drawObjects() {
-    window->clear(sf::Color::Black);
+    window->clear(sf::Color::White);
     readKeyboardInputs();
     bot.draw(*window);
     for (Wall w : walls) {

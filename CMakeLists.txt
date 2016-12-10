@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
-project(Homework5)
+project(TheGame)
 
 #define EXECUTABLE NAME HERE
-set(EXECUTABLE_NAME "h5")
+set(EXECUTABLE_NAME "TheGame")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules" ${CMAKE_MODULE_PATH})

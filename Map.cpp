@@ -13,7 +13,10 @@ Map::Map() {
 }
 
 void Map::drawObjects() {
+    window->clear(sf::Color::Black);
+    readKeyboardInputs();
     bot.draw(*window);
+    window->display();
 }
 
 void Map::readKeyboardInputs() {

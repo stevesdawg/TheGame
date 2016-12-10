@@ -17,6 +17,7 @@ Map::Map() {
 void Map::drawObjects() {
     window->clear(sf::Color::White);
     readKeyboardInputs();
+    processInputs();
     bot.draw(*window);
     for (Wall* w : walls) {
         w->draw(*window);
@@ -35,34 +36,65 @@ void Map::drawObjects() {
 
 void Map::readKeyboardInputs() {
     sf::Event event;
-    float xStep = 10;
-    float yStep = 10;
-    float thetaStep = 5;
+
 
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::KeyPressed) {
-            float theta = bot.getTheta();
-            Bullet* b = new Bullet(bot.getX(), bot.getY(), theta);
-            switch (event.key.code) {
-                case sf::Keyboard::Up:
-                    bot.move(xStep * (float) cos(theta * M_PI/ 180), yStep * (float) sin(theta * M_PI / 180));
-                    break;
-                case sf::Keyboard::Down:
-                    bot.move(-xStep * (float) cos(theta * M_PI/ 180), -yStep * (float) sin(theta * M_PI / 180));
-                    break;
-                case sf::Keyboard::Left:
-                    bot.turn(-thetaStep);
-                    break;
-                case sf::Keyboard::Right:
-                    bot.turn(thetaStep);
-                    break;
-                case sf::Keyboard::M:
-                    bullets.push_back(b);
-                default:
-                    break;
+            if (event.key.code == sf::Keyboard::Up) {
+                botUp = true;
             }
-        } else if (event.type == sf::Event::Closed) {
+            if (event.key.code == sf::Keyboard::Down) {
+                botDown = true;
+            }
+            if (event.key.code == sf::Keyboard::Left) {
+                botLeft = true;
+            }
+            if (event.key.code == sf::Keyboard::Right) {
+                botRight = true;
+            }
+            if (event.key.code == sf::Keyboard::M) {
+                Bullet *b = new Bullet(bot.getX(), bot.getY(), bot.getTheta());
+                bullets.push_back(b);
+            }
+        } else if (event.type == sf::Event::KeyReleased) {
+            if (event.key.code == sf::Keyboard::Up) {
+                botUp = false;
+            }
+            if (event.key.code == sf::Keyboard::Down) {
+                botDown = false;
+            }
+            if (event.key.code == sf::Keyboard::Left) {
+                botLeft = false;
+            }
+            if (event.key.code == sf::Keyboard::Right) {
+                botRight = false;
+            }
+        }
+        else if (event.type == sf::Event::Closed) {
             window->close();
         }
     }
+}
+
+void Map::processInputs() {
+    float xStep = 10;
+    float yStep = 10;
+    float thetaStep = 5;
+    float theta = bot.getTheta();
+    if (botUp) {
+        bot.move(xStep * (float) cos(theta * M_PI / 180), yStep * (float) sin(theta * M_PI / 180));
+    }
+    if (botDown) {
+        bot.move(-xStep * (float) cos(theta * M_PI / 180), -yStep * (float) sin(theta * M_PI / 180));
+    }
+    if (botLeft) {
+        bot.turn(-thetaStep);
+    }
+    if (botRight) {
+        bot.turn(thetaStep);
+    }
+}
+
+void Map::checkBotCollision(Wall* w) {
+
 }

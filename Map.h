@@ -16,7 +16,13 @@ public:
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
+    bool botUp = false;
+    bool botDown = false;
+    bool botRight = false;
+    bool botLeft = false;
     std::vector<Wall*> walls;
     std::vector<Bullet*> bullets;
     void readKeyboardInputs();
+    void processInputs();
+    void checkBotCollision(Wall* w);
 };

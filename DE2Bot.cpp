@@ -61,5 +61,6 @@ void DE2Bot::draw(sf::RenderWindow& window) {
 void DE2Bot::loadSprite() {
     if (texture.loadFromFile(spriteFilename)) {
         sprite.setTexture(texture);
+        sprite.setOrigin(spriteSize/2, spriteSize/2);
     }
 }

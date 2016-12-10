@@ -13,6 +13,9 @@ class Map {
 public:
     Map();
     void drawObjects();
+    const float xStep = 4;
+    const float yStep = 4;
+    const float thetaStep = 5;
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
@@ -24,5 +27,5 @@ private:
     std::vector<Bullet*> bullets;
     void readKeyboardInputs();
     void processInputs();
-    void checkBotCollision(Wall* w);
+    bool checkBotCollision(Wall* w);
 };

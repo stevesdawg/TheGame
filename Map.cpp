@@ -75,24 +75,43 @@ void Map::readKeyboardInputs() {
 }
 
 void Map::processInputs() {
-    float xStep = 4;
-    float yStep = 4;
-    float thetaStep = 5;
     float theta = bot.getTheta();
-    if (botUp) {
-        bot.move(xStep * (float) cos(theta * M_PI / 180), yStep * (float) sin(theta * M_PI / 180));
+    bool collided = false;
+    int i = 0;
+    while (!collided && i < walls.size()) {
+        collided = checkBotCollision(walls[i]);
+        i++;
     }
-    if (botDown) {
-        bot.move(-xStep * (float) cos(theta * M_PI / 180), -yStep * (float) sin(theta * M_PI / 180));
-    }
-    if (botLeft) {
-        bot.turn(-thetaStep);
-    }
-    if (botRight) {
-        bot.turn(thetaStep);
+    if (!collided) {
+        if (botUp) {
+            bot.move(xStep * (float) cos(theta * M_PI / 180), yStep * (float) sin(theta * M_PI / 180));
+        }
+        if (botDown) {
+            bot.move(-xStep * (float) cos(theta * M_PI / 180), -yStep * (float) sin(theta * M_PI / 180));
+        }
+        if (botLeft) {
+            bot.turn(-thetaStep);
+        }
+        if (botRight) {
+            bot.turn(thetaStep);
+        }
     }
 }
 
-void Map::checkBotCollision(Wall* w) {
-
+bool Map::checkBotCollision(Wall* w) {
+    float wx = w->getX();
+    float wy = w->getY();
+    float x = bot.getX();
+    float y = bot.getY();
+    // check if vertical wall hit
+    if (wy <= (y + bot.spriteSize/2) && wy + w->getLength() >= (y-bot.spriteSize/2) && (wx == (x + bot.spriteSize/2) || wx + w->getWidth() == (x - bot.spriteSize/2))) {
+        bot.move(0, yStep * (float) sin(bot.getTheta() * M_PI / 180));
+        return true;
+    }
+    // check if horizontal wall hit
+    if (wx <= (x+bot.spriteSize/2) && wx + w->getWidth() >= (x - bot.spriteSize/2) && (wy == (y+bot.spriteSize/2) || wy + w->getLength() == (y - bot.spriteSize/2))) {
+        bot.move(xStep * (float) sin(bot.getTheta() * M_PI / 180), 0);
+        return true;
+    }
+    return false;
 }

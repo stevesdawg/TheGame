@@ -35,8 +35,8 @@ void Map::drawObjects() {
 
 void Map::readKeyboardInputs() {
     sf::Event event;
-    float xStep = 4;
-    float yStep = 4;
+    float xStep = 10;
+    float yStep = 10;
     float thetaStep = 5;
 
     while (window->pollEvent(event)) {

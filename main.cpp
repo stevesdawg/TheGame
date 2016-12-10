@@ -1,5 +1,5 @@
-#include <SFML/Graphics.hpp>
 #include "Map.h"
+
 int main()
 {
     Map m;

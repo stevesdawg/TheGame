@@ -3,7 +3,19 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/modules/FindSFML.cmake" isTestSource="false" />
+<<<<<<< HEAD
       <sourceFolder url="file://$MODULE_DIR$/Wall.h" isTestSource="false" />
+=======
+<<<<<<< HEAD
+      <sourceFolder url="file://$MODULE_DIR$/Drawable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Map.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Movable.h" isTestSource="false" />
+=======
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
+      <sourceFolder url="file://$MODULE_DIR$/DE2Bot.h" isTestSource="false" />
+>>>>>>> de34f57fcb2cb1cc0515421b9ae903a2a19ddd47
       <sourceFolder url="file://$MODULE_DIR$/DE2Bot.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Map.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Wall.cpp" isTestSource="false" />

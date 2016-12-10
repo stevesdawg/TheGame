@@ -5,8 +5,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Movable.h"
 
-class Bullet : Movable {
+class Bullet : public Movable {
 public:
     Bullet();
     Bullet(float somex, float somey, float someTheta);
@@ -20,8 +21,8 @@ public:
     void turn(float dTheta);
     void turnTo(float newTheta);
 
-    void move(sf::RenderWindow& window);
-    void draw(sf::RenderWindow& window);
+    void move(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &window);
 
 private:
     float x;

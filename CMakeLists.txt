@@ -11,7 +11,7 @@ include_directories(${SFML_INCLUDE_DIR})
 
 set(SOURCE_FILES
         main.cpp DE2Bot.cpp DE2Bot.h Drawable.h Movable.h Map.cpp Map.h
-        Wall.h Wall.cpp, Bullet.cpp, Bullet.h)
+        Wall.h Wall.cpp Bullet.cpp Bullet.h)
 #copy file to where my executable is
 file(COPY "content/botSprite.png" DESTINATION "${CMAKE_BINARY_DIR}")
 

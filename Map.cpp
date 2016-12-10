@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <math.h>
 #include "Map.h"
 
 Map::Map() {
@@ -35,6 +36,7 @@ void Map::drawObjects() {
 
 void Map::readKeyboardInputs() {
     sf::Event event;
+
 
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::KeyPressed) {

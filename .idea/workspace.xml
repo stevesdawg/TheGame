@@ -41,8 +41,13 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="108">
               <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+=======
+            <state relative-caret-position="60">
+              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
               <folding />
             </state>
           </provider>
@@ -61,7 +66,7 @@
       <file leaf-file-name="DE2Bot.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DE2Bot.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
+            <state relative-caret-position="540">
               <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
               <folding>
                 <element signature="e#59#87#0" expanded="true" />
@@ -73,8 +78,13 @@
       <file leaf-file-name="DE2Bot.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DE2Bot.cpp">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="144">
               <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+=======
+            <state relative-caret-position="90">
+              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
               <folding />
             </state>
           </provider>
@@ -83,8 +93,13 @@
       <file leaf-file-name="Map.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Map.h">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="234">
               <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+=======
+            <state relative-caret-position="255">
+              <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
               <folding>
                 <element signature="e#59#87#0" expanded="true" />
               </folding>
@@ -95,8 +110,13 @@
       <file leaf-file-name="Map.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Map.cpp">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="270">
               <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+=======
+            <state relative-caret-position="49">
+              <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
               <folding>
                 <element signature="e#59#76#0" expanded="true" />
               </folding>
@@ -107,8 +127,26 @@
       <file leaf-file-name="Movable.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Movable.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="135">
               <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+=======
+      <file leaf-file-name="Drawable.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Drawable.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
               <folding />
             </state>
           </provider>
@@ -117,9 +155,11 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="135">
               <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-              <folding />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -140,6 +180,7 @@
         <option value="$PROJECT_DIR$/DE2Bot.cpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/Map.cpp" />
       </list>
     </option>
@@ -151,9 +192,15 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="-1" />
     <option name="width" value="1922" />
     <option name="height" value="1055" />
+=======
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="832" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -220,7 +267,11 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
   </component>
   <component name="RunManager" selected="Application.Build All">
     <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TheGame" TARGET_NAME="TheGame" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
@@ -385,6 +436,7 @@
       <method />
     </configuration>
     <configuration default="false" name="TheGame" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TheGame" TARGET_NAME="TheGame" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TheGame" RUN_TARGET_NAME="TheGame">
+<<<<<<< HEAD
       <envs />
       <method />
     </configuration>
@@ -396,6 +448,19 @@
       <envs />
       <method />
     </configuration>
+=======
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="DE2Trouble" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TheGame" TARGET_NAME="DE2Trouble" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TheGame" RUN_TARGET_NAME="DE2Trouble">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="h5" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Homework5" TARGET_NAME="h5" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Homework5" RUN_TARGET_NAME="h5">
+      <envs />
+      <method />
+    </configuration>
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
     <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TheGame" RUN_TARGET_NAME="TheGame" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
       <method />
@@ -426,11 +491,16 @@
       <workItem from="1481241500795" duration="6370000" />
       <workItem from="1481260272238" duration="6145000" />
       <workItem from="1481326344496" duration="672000" />
+<<<<<<< HEAD
       <workItem from="1481331186874" duration="1530000" />
+=======
+      <workItem from="1481332017558" duration="598000" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="16243000" />
   </component>
   <component name="ToolWindowManager">
@@ -444,6 +514,21 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294979" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294979" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="15311000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="832" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13263889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26081258" sideWeight="0.83263886" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294979" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896462" sideWeight="0.50555557" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -477,7 +562,11 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="306">
+=======
+        <state relative-caret-position="255">
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
@@ -491,6 +580,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/DE2Bot.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
@@ -562,6 +652,84 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game.h" />
+=======
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
+    <entry file="file://$PROJECT_DIR$/DE2Bot.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
+          <folding>
+            <element signature="e#59#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DE2Bot.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Map.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+          <folding>
+            <element signature="e#59#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Map.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
+          <folding>
+            <element signature="e#59#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Movable.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/modules/FindSFML.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
+    <entry file="file://$PROJECT_DIR$/Game.h" />
     <entry file="file://$PROJECT_DIR$/DE2Bot.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -574,6 +742,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DE2Bot.cpp">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+          <folding />
+=======
         <state relative-caret-position="108">
           <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
           <folding />
@@ -587,6 +760,7 @@
           <folding>
             <element signature="e#59#87#0" expanded="true" />
           </folding>
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
         </state>
       </provider>
     </entry>
@@ -612,7 +786,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -625,6 +801,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game.h" />
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+=======
     <entry file="file://$PROJECT_DIR$/DE2Bot.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -636,6 +815,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Movable.h">
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
@@ -651,11 +831,20 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Game.h" />
+    <entry file="file://$PROJECT_DIR$/modules/FindSFML.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -663,46 +852,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Game.h" />
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Drawable.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game.h" />
-    <entry file="file://$PROJECT_DIR$/modules/FindSFML.cmake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/DE2Bot.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="573">
           <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
           <folding>
             <element signature="e#59#87#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/Game.h" />
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/DE2Bot.cpp">
+=======
+    <entry file="file://$PROJECT_DIR$/Game.h" />
+    <entry file="file://$PROJECT_DIR$/modules/FindSFML.cmake">
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
@@ -710,34 +890,70 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Movable.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/DE2Bot.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DE2Bot.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
+          <folding>
+            <element signature="e#59#87#0" expanded="true" />
+          </folding>
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="108">
           <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+=======
+        <state relative-caret-position="60">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="162">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
           <folding />
+=======
+        <state relative-caret-position="135">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Map.h">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="234">
           <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+=======
+        <state relative-caret-position="255">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
           <folding>
             <element signature="e#59#87#0" expanded="true" />
           </folding>
@@ -746,11 +962,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Map.cpp">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="270">
           <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
           <folding>
             <element signature="e#59#76#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="49">
+          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+          <folding>
+            <element signature="e#59#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Movable.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Drawable.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+>>>>>>> ffb11ea2c0536c999e53f17364578189d406124f
         </state>
       </provider>
     </entry>

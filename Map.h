@@ -16,7 +16,7 @@ public:
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
-    std::vector<Wall> walls;
-    std::vector<Bullet> bullets;
+    std::vector<Wall*> walls;
+    std::vector<Bullet*> bullets;
     void readKeyboardInputs();
 };

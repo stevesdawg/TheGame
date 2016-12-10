@@ -9,24 +9,24 @@
 Map::Map() {
     window = new sf::RenderWindow(sf::VideoMode(1024, 768), "TheGame");
     bot.moveTo(300, 300);
-    Wall w(5, 5, 500, 3);
+    Wall* w = new Wall(5, 5, 500, 3);
     walls.push_back(w);
 }
 
 void Map::drawObjects() {
-    window->clear(sf::Color::Black);
+    window->clear(sf::Color::White);
     readKeyboardInputs();
     bot.draw(*window);
-    for (Wall w : walls) {
-        w.draw(*window);
+    for (Wall* w : walls) {
+        w->draw(*window);
     }
     if (bullets.size() > 0) {
-        for (Bullet b : bullets) {
+        for (Bullet* b : bullets) {
             float bulletXStep = 5;
             float bulletYStep = 5;
-            b.move(bulletXStep * (float) cos(b.getTheta() * M_PI / 180),
-                   bulletYStep * (float) sin(b.getTheta() * M_PI / 180));
-            b.draw(*window);
+            b->move(bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
+                   bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
+            b->draw(*window);
         }
     }
     window->display();
@@ -41,7 +41,7 @@ void Map::readKeyboardInputs() {
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::KeyPressed) {
             float theta = bot.getTheta();
-            Bullet b(bot.getX(), bot.getY(), theta);
+            Bullet* b = new Bullet(bot.getX(), bot.getY(), theta);
             switch (event.key.code) {
                 case sf::Keyboard::Up:
                     bot.move(xStep * (float) cos(theta * M_PI/ 180), yStep * (float) sin(theta * M_PI / 180));

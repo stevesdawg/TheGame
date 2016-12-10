@@ -7,7 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Map.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Game.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Movable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DE2Bot.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Map.h" isTestSource="false" />

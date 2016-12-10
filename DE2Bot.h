@@ -7,8 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "Movable.h"
 
-
-class DE2Bot : Movable {
+class DE2Bot : public Movable {
 public:
     const int spriteSize = 96;
     const std::string spriteFilename = "botSprite.png";

@@ -10,6 +10,7 @@
 #include "Map.h"
 
 Map::Map() {
+
     window = new sf::RenderWindow(sf::VideoMode(1440, 1080), "TheGame");
     bot.moveTo(300, 300);
     Wall* w = new Wall(341, 200, 10, 500);
@@ -28,6 +29,7 @@ Map::Map() {
     walls.push_back(w7);
     background = sf::Color::White;
     bot.setNumWalls(walls.size());
+    startServer();
 }
 
 void Map::drawObjects() {
@@ -35,7 +37,9 @@ void Map::drawObjects() {
     if (bot.dead) {
         background = sf::Color::Green;
     }
+    receive();
     readKeyboardInputs();
+    send();
     processInputs();
     bot.draw(*window);
     for (Wall *w : walls) {
@@ -48,7 +52,7 @@ void Map::drawObjects() {
                 if (b->leave) {
                     bullets.erase(bullets.begin() + i);
                 }
-                checkBulletHit(b);
+                //checkBulletHit(b);
                 b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
                         b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
                 checkBulletTopCollision(b);
@@ -92,8 +96,8 @@ void Map::readKeyboardInputs() {
                     botRight = true;
                 }
                 if (event.key.code == sf::Keyboard::M) {
-                    Bullet *b = new Bullet(bot.getX(), bot.getY(), bot.getTheta());
-                    bullets.push_back(b);
+                    shot = true;
+
                 }
             }
             if (event.key.code == sf::Keyboard::P) {
@@ -417,6 +421,10 @@ void Map::processInputs() {
     if (botRight) {
         bot.turn(thetaStep);
     }
+    if (shot) {
+        Bullet *b = new Bullet(bot.getX(), bot.getY(), bot.getTheta());
+        bullets.push_back(b);
+    }
 }
 
 void Map::checkBotLeftCollision() {
@@ -495,4 +503,30 @@ void Map::checkBotBottomCollision() {
             bot.bottomHits[i] = false;
         }
     }
+}
+void Map::startServer(){
+
+    listener.listen(2000);
+    listener.accept(socket);
+}
+
+void Map::startClient(){
+    sf::IpAddress k("128.61.37.176");
+    socket.connect(k, 2000);
+}
+
+void Map::receive(){
+    char buffer[5];
+    std::size_t received;
+    socket.receive(buffer, sizeof(buffer), received);
+    std::cout << buffer << std::endl;
+
+}
+
+void Map::send() {
+    socket.send(&botForward, sizeof(bool));
+    socket.send(&botBackward, sizeof(bool));
+    socket.send(&botLeft,sizeof(bool));
+    socket.send(&botRight,sizeof(bool));
+    socket.send(&shot,sizeof(bool));
 }

@@ -13,6 +13,7 @@ Map::Map() {
 
     window = new sf::RenderWindow(sf::VideoMode(1440, 1080), "TheGame");
     bot.moveTo(300, 300);
+    networkBot.moveTo(500,700);
     Wall* w = new Wall(341, 200, 10, 500);
     Wall* w2 = new Wall(341, 200, 500, 10);
     Wall* w3 = new Wall(841, 200, 10, 500);
@@ -29,6 +30,7 @@ Map::Map() {
     walls.push_back(w7);
     background = sf::Color::White;
     bot.setNumWalls(walls.size());
+    networkBot.setNumWalls(walls.size());
     startServer();
 }
 
@@ -39,10 +41,13 @@ void Map::drawObjects() {
     }
 
     send();
+    hasShot = false;
     readKeyboardInputs();
     receive();
-    processInputs();
+    processInputs(&bot);
+    processInputs(&networkBot);
     bot.draw(*window);
+    networkBot.draw(*window);
     for (Wall *w : walls) {
         w->draw(*window);
     }
@@ -67,14 +72,14 @@ void Map::drawObjects() {
     window->display();
 }
 
-void Map::checkBulletHit(Bullet* b) {
-    if (!b->justLaunched(&bot)) {
+void Map::checkBulletHit(Bullet* b, DE2Bot* bot) {
+    if (!b->justLaunched(bot)) {
         float x = b->getX();
         float y = b->getY();
-        float botx = bot.getX();
-        float boty = bot.getY();
-        if (x >= botx && x - bot.spriteSize/2 <= botx + bot.spriteSize/2 && y >= boty - bot.spriteSize/2 && y <= boty + bot.spriteSize/2) {
-            bot.dead = true;
+        float botx = bot->getX();
+        float boty = bot->getY();
+        if (x >= botx && x - bot->spriteSize/2 <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2) {
+            bot->dead = true;
         }
     }
 }
@@ -85,19 +90,19 @@ void Map::readKeyboardInputs() {
         if (event.type == sf::Event::KeyPressed) {
             if (!bot.dead) {
                 if (event.key.code == sf::Keyboard::Up) {
-                    botForward = true;
+                    bot.botForward = true;
                 }
                 if (event.key.code == sf::Keyboard::Down) {
-                    botBackward = true;
+                    bot.botBackward = true;
                 }
                 if (event.key.code == sf::Keyboard::Left) {
-                    botLeft = true;
+                    bot.botLeft = true;
                 }
                 if (event.key.code == sf::Keyboard::Right) {
-                    botRight = true;
+                    bot.botRight = true;
                 }
                 if (event.key.code == sf::Keyboard::M) {
-                    shot = true;
+                    bot.shot = true;
 
                 }
             }
@@ -109,23 +114,27 @@ void Map::readKeyboardInputs() {
         } else if (event.type == sf::Event::KeyReleased) {
             if (!bot.dead) {
                 if (event.key.code == sf::Keyboard::Up) {
-                    botForward = false;
+                    bot.botForward = false;
                 }
                 if (event.key.code == sf::Keyboard::Down) {
-                    botBackward = false;
+                    bot.botBackward = false;
                 }
                 if (event.key.code == sf::Keyboard::Left) {
-                    botLeft = false;
+                    bot.botLeft = false;
                 }
                 if (event.key.code == sf::Keyboard::Right) {
-                    botRight = false;
+                    bot.botRight = false;
+                }
+                if (event.key.code == sf::Keyboard::M) {
+                    bot.shot = false;
+
                 }
             }
             else {
-                botForward = false;
-                botBackward = false;
-                botLeft = false;
-                botRight = false;
+                bot.botForward = false;
+                bot.botBackward = false;
+                bot.botLeft = false;
+                bot.botRight = false;
             }
         }
         else if (event.type == sf::Event::Closed) {
@@ -204,18 +213,18 @@ void Map::checkBulletTopCollision(Bullet *b) {
     }
 }
 
-void Map::processInputs() {
-    float theta = bot.getTheta();
+void Map::processInputs(DE2Bot* bot) {
+    float theta = bot->getTheta();
     const float standardXStep = xStep * (float) cos(theta * M_PI / 180);
     const float standardYStep = yStep * (float) sin(theta * M_PI / 180);
     float dx = standardXStep;
     float dy = standardYStep;
-    checkBotBottomCollision();
-    checkBotRightCollision();
-    checkBotTopCollision();
-    checkBotLeftCollision();
-    if (botForward) {
-        if (bot.hasHitLeft()) { // NO NEED TO CHECK CORNERS!!!
+    checkBotBottomCollision(bot);
+    checkBotRightCollision(bot);
+    checkBotTopCollision(bot);
+    checkBotLeftCollision(bot);
+    if (bot->botForward) {
+        if (bot->hasHitLeft()) { // NO NEED TO CHECK CORNERS!!!
             dy = standardYStep;
             if (theta <= 270 && theta >= 90) {
                 dx = standardXStep;
@@ -223,7 +232,7 @@ void Map::processInputs() {
                 dx = 0;
             }
         }
-        if (bot.hasHitRight()) { // NO NEED TO CHECK CORNERS!!!
+        if (bot->hasHitRight()) { // NO NEED TO CHECK CORNERS!!!
             dy = standardYStep;
             if (theta >= 270 || theta <= 90) {
                 dx = standardXStep;
@@ -231,8 +240,8 @@ void Map::processInputs() {
                 dx = 0;
             }
         }
-        if (bot.hasHitTop()) { // hit a wall from top
-            if (bot.hasHitRight()) { // hit bottom left corner
+        if (bot->hasHitTop()) { // hit a wall from top
+            if (bot->hasHitRight()) { // hit bottom left corner
                 std::cout << "HIT BOTTOM LEFT CORNER!" << std::endl;
                 if (theta >= 180) {
                     dy = standardYStep;
@@ -249,7 +258,7 @@ void Map::processInputs() {
                         dx = 0;
                     }
                 }
-            } else if (bot.hasHitLeft()) { // hit bottom right corner
+            } else if (bot->hasHitLeft()) { // hit bottom right corner
                 std::cout << "HIT BOTTOM RIGHT CORNER!" << std::endl;
                 if (theta >= 90) {
                     dx = standardXStep;
@@ -273,8 +282,8 @@ void Map::processInputs() {
                 }
             }
         }
-        if (bot.hasHitBottom()) { // hit a wall from below
-            if (bot.hasHitRight()) { // hit top left corner
+        if (bot->hasHitBottom()) { // hit a wall from below
+            if (bot->hasHitRight()) { // hit top left corner
                 std::cout << "HIT TOP LEFT CORNER!" << std::endl;
                 if (theta <= 180) {
                     dy = standardYStep;
@@ -289,7 +298,7 @@ void Map::processInputs() {
                         dx = standardXStep;
                     }
                 }
-            } else if (bot.hasHitLeft()) { // hit top right corner
+            } else if (bot->hasHitLeft()) { // hit top right corner
                 std::cout << "HIT TOP RIGHT CORNER!" << std::endl;
                 if (theta <= 270) {
                     dx = standardXStep;
@@ -313,10 +322,10 @@ void Map::processInputs() {
                 }
             }
         }
-        bot.move(dx, dy);
+        bot->move(dx, dy);
     }
-    if (botBackward) {
-        if (bot.hasHitLeft()) { // NO NEED TO CHECK CORNERS
+    if (bot->botBackward) {
+        if (bot->hasHitLeft()) { // NO NEED TO CHECK CORNERS
             dy = standardYStep;
             if (theta >= 270 || theta <= 90) {
                 dx = standardXStep;
@@ -324,7 +333,7 @@ void Map::processInputs() {
                 dx = 0;
             }
         }
-        if (bot.hasHitRight()) {
+        if (bot->hasHitRight()) {
             dy = standardYStep;
             if (theta <= 270 && theta >= 90) { // NO NEED TO CHECK CORNERS
                 dx = standardXStep;
@@ -332,8 +341,8 @@ void Map::processInputs() {
                 dx = 0;
             }
         }
-        if (bot.hasHitTop()) { // hit a wall from top
-            if (bot.hasHitRight()) { // hit bottom left corner
+        if (bot->hasHitTop()) { // hit a wall from top
+            if (bot->hasHitRight()) { // hit bottom left corner
                 std::cout << "HIT BOTTOM LEFT CORNER!" << std::endl;
                 if (theta <= 270) {
                     dx = standardXStep;
@@ -348,7 +357,7 @@ void Map::processInputs() {
                     dx = 0;
                     dy = 0;
                 }
-            } else if (bot.hasHitLeft()) { // hit bottom right corner
+            } else if (bot->hasHitLeft()) { // hit bottom right corner
                 std::cout << "HIT BOTTOM RIGHT CORNER!" << std::endl;
                 if (theta <= 180) {
                     dx = 0;
@@ -372,8 +381,8 @@ void Map::processInputs() {
                 }
             }
         }
-        if (bot.hasHitBottom()) { // hit a wall from below
-            if (bot.hasHitRight()) { // hit top left corner
+        if (bot->hasHitBottom()) { // hit a wall from below
+            if (bot->hasHitRight()) { // hit top left corner
                 std::cout << "HIT TOP LEFT CORNER!" << std::endl;
                 if (theta >= 180) {
                     dy = standardYStep;
@@ -388,7 +397,7 @@ void Map::processInputs() {
                         dx = 0;
                     }
                 }
-            } else if (bot.hasHitLeft()) { // hit top right corner
+            } else if (bot->hasHitLeft()) { // hit top right corner
                 std::cout << "HIT TOP RIGHT CORNER!" << std::endl;
                 if (theta >= 180) {
                     dy = standardYStep;
@@ -414,94 +423,96 @@ void Map::processInputs() {
         }
         dx *= -1;
         dy *= -1;
-        bot.move(dx, dy);
+        bot->move(dx, dy);
     }
-    if (botLeft) {
-        bot.turn(-thetaStep);
+    if (bot->botLeft) {
+        bot->turn(-thetaStep);
     }
-    if (botRight) {
-        bot.turn(thetaStep);
+    if (bot->botRight) {
+        bot->turn(thetaStep);
     }
-    if (shot) {
-        Bullet *b = new Bullet(bot.getX(), bot.getY(), bot.getTheta());
+    if (bot->shot) {
+        Bullet *b = new Bullet(bot->getX(), bot->getY(), bot->getTheta());
         bullets.push_back(b);
+        hasShot = true;
+        //bot->shot = true;
     }
 }
 
-void Map::checkBotLeftCollision() {
+void Map::checkBotLeftCollision(DE2Bot* bot) {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
-        float x = bot.getX();
-        float y = bot.getY();
+        float x = bot->getX();
+        float y = bot->getY();
         float tolerance = 5;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit left side of wall:
-        if (std::abs((x + bot.spriteSize/2) - wx) <= tolerance && wy <= (y + bot.spriteSize/2) && wy + w->getLength() >= (y - bot.spriteSize/2)) {
+        if (std::abs((x + bot->spriteSize/2) - wx) <= tolerance && wy <= (y + bot->spriteSize/2) && wy + w->getLength() >= (y - bot->spriteSize/2)) {
             rect->setFillColor(sf::Color::Blue);
-            bot.leftHits[i] = true;
+            bot->leftHits[i] = true;
         } else {
-            bot.leftHits[i] = false;
+            bot->leftHits[i] = false;
         }
     }
 }
 
-void Map::checkBotRightCollision() {
+void Map::checkBotRightCollision(DE2Bot* bot) {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
-        float x = bot.getX();
-        float y = bot.getY();
+        float x = bot->getX();
+        float y = bot->getY();
         float tolerance = 3;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit right side of wall:
-        if (std::abs((x - bot.spriteSize/2) - (wx + w->getWidth())) <= tolerance && wy <= (y + bot.spriteSize/2) &&
-            wy + w->getLength() >= (y - bot.spriteSize/2)) {
+        if (std::abs((x - bot->spriteSize/2) - (wx + w->getWidth())) <= tolerance && wy <= (y + bot->spriteSize/2) &&
+            wy + w->getLength() >= (y - bot->spriteSize/2)) {
             rect->setFillColor(sf::Color::Cyan);
-            bot.rightHits[i] = true;
+            bot->rightHits[i] = true;
         } else {
-            bot.rightHits[i] = false;
+            bot->rightHits[i] = false;
         }
     }
 }
 
-void Map::checkBotTopCollision() {
+void Map::checkBotTopCollision(DE2Bot* bot) {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
-        float x = bot.getX();
-        float y = bot.getY();
+        float x = bot->getX();
+        float y = bot->getY();
         float tolerance = 3;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit top side of wall:
-        if (std::abs((y + bot.spriteSize/2) - wy) <= tolerance && wx <= (x + bot.spriteSize/2) && wx + w->getWidth() >= (x - bot.spriteSize/2)) {
+        if (std::abs((y + bot->spriteSize/2) - wy) <= tolerance && wx <= (x + bot->spriteSize/2) && wx + w->getWidth() >= (x - bot->spriteSize/2)) {
             rect->setFillColor(sf::Color::Magenta);
-            bot.topHits[i] = true;
+            bot->topHits[i] = true;
         } else {
-            bot.topHits[i] = false;
+            bot->topHits[i] = false;
         }
     }
 }
 
-void Map::checkBotBottomCollision() {
+void Map::checkBotBottomCollision(DE2Bot* bot) {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
-        float x = bot.getX();
-        float y = bot.getY();
+        float x = bot->getX();
+        float y = bot->getY();
         float tolerance = 3;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit bottom side of wall:
-        if (std::abs((y - bot.spriteSize/2) - (wy + w->getLength())) <= tolerance && wx <= (x + bot.spriteSize/2) &&
-            wx + w->getWidth() >= (x - bot.spriteSize/2)) {
+        if (std::abs((y - bot->spriteSize/2) - (wy + w->getLength())) <= tolerance && wx <= (x + bot->spriteSize/2) &&
+            wx + w->getWidth() >= (x - bot->spriteSize/2)) {
             rect->setFillColor(sf::Color::Red);
-            bot.bottomHits[i] = true;
+            bot->bottomHits[i] = true;
         } else {
-            bot.bottomHits[i] = false;
+            bot->bottomHits[i] = false;
         }
     }
 }
@@ -517,17 +528,79 @@ void Map::startClient(){
 }
 
 void Map::receive(){
-    char buffer[5];
+    char buffer[6];
     std::size_t received;
-    socket.receive(buffer, sizeof(buffer), received);
-    
+    socket.receive(buffer, sizeof(char)*6, received);
+
+    if (buffer[0] == '1'){
+        networkBot.botForward = true;
+    }
+    else{
+        networkBot.botForward = false;
+    }
+
+    if (buffer[1] == '1'){
+        networkBot.botBackward = true;
+    }
+    else{
+        networkBot.botBackward = false;
+    }
+    if (buffer[2] == '1'){
+        networkBot.botLeft = true;
+    }
+    else{
+        networkBot.botLeft = false;
+    }
+    if (buffer[3] == '1'){
+        networkBot.botRight = true;
+    }
+    else{
+        networkBot.botRight = false;
+    }
+    if (buffer[4] == '1'){
+        networkBot.shot = true;
+    }
+    else{
+        networkBot.shot = false;
+    }
+
 
 }
 
 void Map::send() {
-    socket.send(&botForward, sizeof(bool));
-    socket.send(&botBackward, sizeof(bool));
-    socket.send(&botLeft,sizeof(bool));
-    socket.send(&botRight,sizeof(bool));
-    socket.send(&shot,sizeof(bool));
+    char sendArr[6];
+    if (bot.botForward){
+        sendArr[0] = '1';
+    }
+    else{
+        sendArr[0] = '0';
+    }
+
+    if (bot.botBackward){
+        sendArr[1] = '1';
+    }
+    else{
+        sendArr[1] = '0';
+    }
+    if (bot.botLeft){
+        sendArr[2] = '1';
+    }
+    else{
+        sendArr[2] = '0';
+    }
+    if (bot.botRight){
+        sendArr[3] = '1';
+    }
+    else{
+        sendArr[3] = '0';
+    }
+    if (bot.shot){
+        sendArr[4] = '1';
+    }
+    else{
+        sendArr[4] = '0';
+    }
+    sendArr[5] = '\0';
+    socket.send(sendArr, sizeof(char)*6);
+
 }

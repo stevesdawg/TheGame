@@ -22,25 +22,22 @@ public:
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
-    bool botForward = false;
-    bool botBackward = false;
-    bool botRight = false;
-    bool botLeft = false;
-    bool shot = false;
+    DE2Bot networkBot;
     std::vector<Wall*> walls;
     std::vector<Bullet*> bullets;
     sf::Color background;
     sf::TcpSocket socket;
     sf::TcpListener listener;
+    bool hasShot = false;
     void readKeyboardInputs();
-    void processInputs();
+    void processInputs(DE2Bot*);
 
-    void checkBulletHit(Bullet* b);
+    void checkBulletHit(Bullet* b, DE2Bot*);
 
-    void checkBotLeftCollision();
-    void checkBotRightCollision();
-    void checkBotTopCollision();
-    void checkBotBottomCollision();
+    void checkBotLeftCollision(DE2Bot*);
+    void checkBotRightCollision(DE2Bot*);
+    void checkBotTopCollision(DE2Bot*);
+    void checkBotBottomCollision(DE2Bot*);
 
     void checkBulletBottomCollision(Bullet* b);
     void checkBulletTopCollision(Bullet* b);

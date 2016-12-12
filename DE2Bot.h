@@ -29,6 +29,11 @@ public:
     bool hasHitTop();
     bool hasHitBottom();
     bool dead = false;
+    bool botForward = false;
+    bool botBackward = false;
+    bool botRight = false;
+    bool botLeft = false;
+    bool shot = false;
 
     void move(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);

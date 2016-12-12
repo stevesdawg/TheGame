@@ -18,7 +18,6 @@ public:
     const float xStep = 5;
     const float yStep = 5;
     const float thetaStep = 6;
-    const int numBullets = 5;
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
@@ -31,7 +30,7 @@ private:
     std::vector<Bullet*> bullets;
     sf::Color background;
     sf::TcpSocket socket;
-    sf::TcpListener listener;
+//    sf::TcpListener listener;
     void readKeyboardInputs();
     void processInputs();
 
@@ -47,7 +46,7 @@ private:
     void checkBulletRightCollision(Bullet* b);
     void checkBulletLeftCollision(Bullet* b);
 
-    void startServer();
+//    void startServer();
     void startClient();
     void receive();
     void send();

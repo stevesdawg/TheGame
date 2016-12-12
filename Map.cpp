@@ -29,7 +29,7 @@ Map::Map() {
     walls.push_back(w7);
     background = sf::Color::Yellow;
     bot.setNumWalls(walls.size());
-    startServer();
+    startClient();
 }
 
 void Map::drawObjects() {
@@ -504,11 +504,11 @@ void Map::checkBotBottomCollision() {
         }
     }
 }
-void Map::startServer(){
-
-    listener.listen(2000);
-    listener.accept(socket);
-}
+//void Map::startServer(){
+//
+//    listener.listen(2000);
+//    listener.accept(socket);
+//}
 
 void Map::startClient(){
     sf::IpAddress k("128.61.37.176");
@@ -519,7 +519,10 @@ void Map::receive(){
     char buffer[5];
     std::size_t received;
     socket.receive(buffer, sizeof(buffer), received);
-    std::cout << buffer << std::endl;
+    if (received > 0) {
+        std::cout << "Received Something Over Socket!" << std::endl;
+    }
+//    std::cout << buffer << std::endl;
 
 }
 

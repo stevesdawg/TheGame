@@ -16,6 +16,7 @@ public:
     float getY();
     float getLength();
     float getWidth();
+    sf::RectangleShape* getRectangle();
 
     void draw(sf::RenderWindow& window);
 private:
@@ -23,4 +24,5 @@ private:
     float y;
     float length;
     float width;
+    sf::RectangleShape rect;
 };

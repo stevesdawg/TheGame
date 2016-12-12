@@ -13,19 +13,23 @@ class Map {
 public:
     Map();
     void drawObjects();
-    const float xStep = 4;
-    const float yStep = 4;
-    const float thetaStep = 5;
+    const float xStep = 5;
+    const float yStep = 5;
+    const float thetaStep = 6;
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
-    bool botUp = false;
-    bool botDown = false;
+    bool botForward = false;
+    bool botBackward = false;
     bool botRight = false;
     bool botLeft = false;
     std::vector<Wall*> walls;
     std::vector<Bullet*> bullets;
+    sf::Color background;
     void readKeyboardInputs();
     void processInputs();
-    bool checkBotCollision(Wall* w);
+    void checkLeftCollision(float *dx, float *dy);
+    void checkRightCollision(float *dx, float *dy);
+    void checkTopCollision(float *dx, float *dy);
+    void checkBottomCollision(float *dx, float *dy);
 };

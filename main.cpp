@@ -1,10 +1,10 @@
-//#include "Map.h"
-//
-//int main()
-//{
-//    Map m;
-//    while (true) {
-//        m.drawObjects();
-//    }
-//    return 0;
-//}c
+#include "Map.h"
+
+int main()
+{
+    Map m;
+    while (true) {
+        m.drawObjects();
+    }
+    return 0;
+}

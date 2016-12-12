@@ -13,11 +13,15 @@ Wall::Wall(){
     length = 0;
     width = 0;
 }
-Wall::Wall(float x1, float y1, float length1, float width1) {
+Wall::Wall(float x1, float y1, float width1, float length1) {
     x = x1;
     y = y1;
     length = length1;
     width = width1;
+    rect.setPosition(x, y);
+    rect.setFillColor(sf::Color::Black);
+    sf::Vector2f a(width, length);
+    rect.setSize(a);
 }
 
 float Wall::getX() {
@@ -37,10 +41,9 @@ float Wall::getWidth() {
 }
 
 void Wall::draw(sf::RenderWindow& window) {
-    sf::RectangleShape rectObj;
-    rectObj.setFillColor(sf::Color::Black);
-    rectObj.setPosition(x, y);
-    sf::Vector2f a(length, width);
-    rectObj.setSize(a);
-    window.draw(rectObj);
+    window.draw(rect);
+}
+
+sf::RectangleShape* Wall::getRectangle() {
+    return &rect;
 }

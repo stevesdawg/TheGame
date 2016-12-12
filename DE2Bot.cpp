@@ -11,19 +11,28 @@ DE2Bot::DE2Bot() {
     loadSprite();
 }
 
-DE2Bot::DE2Bot(float somex, float somey, float someTheta) {
+DE2Bot::DE2Bot(float somex, float somey, float someTheta, int walls) {
     x = somex;
     y = somey;
     theta = someTheta;
+    numWalls = walls;
+    for (int i = 0; i < numWalls; i++) {
+        leftHits.push_back(false);
+        rightHits.push_back(false);
+        topHits.push_back(false);
+        bottomHits.push_back(false);
+    }
     loadSprite();
 }
 
 void DE2Bot::turn(float dTheta) {
     theta += dTheta;
+    normalizeTheta();
 }
 
 void DE2Bot::turnTo(float newTheta) {
     theta = newTheta;
+    normalizeTheta();
 }
 
 void DE2Bot::move(float dx, float dy) {
@@ -36,6 +45,10 @@ void DE2Bot::moveTo(float newx, float newy) {
     y = newy;
 }
 
+void DE2Bot::setNumWalls(int num) {
+    numWalls = num;
+}
+
 float DE2Bot::getX() {
     return x;
 }
@@ -46,6 +59,38 @@ float DE2Bot::getY() {
 
 float DE2Bot::getTheta() {
     return theta;
+}
+
+bool DE2Bot::hasHitBottom() {
+    bool b = false;
+    for (int i = 0; i < numWalls; i++) {
+        b = b || bottomHits[i];
+    }
+    return b;
+}
+
+bool DE2Bot::hasHitTop() {
+    bool b = false;
+    for (int i = 0; i < numWalls; i++) {
+        b = b || topHits[i];
+    }
+    return b;
+}
+
+bool DE2Bot::hasHitRight() {
+    bool b = false;
+    for (int i = 0; i < numWalls; i++) {
+        b = b || rightHits[i];
+    }
+    return b;
+}
+
+bool DE2Bot::hasHitLeft() {
+    bool b = false;
+    for (int i = 0; i < numWalls; i++) {
+        b = b || leftHits[i];
+    }
+    return b;
 }
 
 void DE2Bot::move(sf::RenderWindow& window) {
@@ -62,5 +107,16 @@ void DE2Bot::loadSprite() {
     if (texture.loadFromFile(spriteFilename)) {
         sprite.setTexture(texture);
         sprite.setOrigin(spriteSize/2, spriteSize/2);
+    }
+}
+
+void DE2Bot::normalizeTheta() {
+    if (theta >= 360) {
+        int quotient = (int) floor(theta / 360);
+        theta = theta - quotient * 360;
+    } else if (theta < 0) {
+        theta = theta * -1;
+        normalizeTheta();
+        theta = 360 - theta;
     }
 }

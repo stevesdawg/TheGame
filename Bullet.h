@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Movable.h"
+#include "DE2Bot.h"
 
 class Bullet : public Movable {
 public:
@@ -20,12 +21,14 @@ public:
     float bulletYStep = 7;
     const float bulletRadius = 5;
     const sf::Time lifeTime = sf::seconds(5);
+    bool hasLeftBot = false;
     bool leave = false;
 
     void move(float dx, float dy);
     void moveTo(float newx, float newy);
     void turn(float dTheta);
     void turnTo(float newTheta);
+    bool justLaunched(DE2Bot* bot);
 
     void move(sf::RenderWindow &window);
     void draw(sf::RenderWindow &window);

@@ -28,6 +28,7 @@ public:
     bool hasHitRight();
     bool hasHitTop();
     bool hasHitBottom();
+    bool dead = false;
 
     void move(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);
@@ -42,7 +43,6 @@ private:
     float y;
     float theta;
     int numWalls;
-    bool dead = false;
 
     sf::Sprite sprite;
     sf::Texture texture;

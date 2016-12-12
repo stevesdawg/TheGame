@@ -31,6 +31,8 @@ private:
     void readKeyboardInputs();
     void processInputs();
 
+    void checkBulletHit(Bullet* b);
+
     void checkBotLeftCollision();
     void checkBotRightCollision();
     void checkBotTopCollision();

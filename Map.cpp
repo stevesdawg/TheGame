@@ -32,49 +32,69 @@ Map::Map() {
 
 void Map::drawObjects() {
     window->clear(background);
+    if (bot.dead) {
+        background = sf::Color::Green;
+    }
     readKeyboardInputs();
     processInputs();
     bot.draw(*window);
-    for (Wall* w : walls) {
+    for (Wall *w : walls) {
         w->draw(*window);
     }
-    if (bullets.size() > 0) {
-        for (int i = 0; i < bullets.size(); i++) {
-            Bullet* b = bullets[i];
-            if (b->leave) {
-                bullets.erase(bullets.begin()+i);
+    if (!bot.dead) {
+        if (bullets.size() > 0) {
+            for (int i = 0; i < bullets.size(); i++) {
+                Bullet *b = bullets[i];
+                if (b->leave) {
+                    bullets.erase(bullets.begin() + i);
+                }
+                checkBulletHit(b);
+                b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
+                        b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
+                checkBulletTopCollision(b);
+                checkBulletRightCollision(b);
+                checkBulletLeftCollision(b);
+                checkBulletBottomCollision(b);
+                b->draw(*window);
             }
-            b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
-                   b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
-            checkBulletTopCollision(b);
-            checkBulletRightCollision(b);
-            checkBulletLeftCollision(b);
-            checkBulletBottomCollision(b);
-            b->draw(*window);
         }
     }
     window->display();
+}
+
+void Map::checkBulletHit(Bullet* b) {
+    if (!b->justLaunched(&bot)) {
+        float x = b->getX();
+        float y = b->getY();
+        float botx = bot.getX();
+        float boty = bot.getY();
+        if (x >= botx && x - bot.spriteSize/2 <= botx + bot.spriteSize/2 && y >= boty - bot.spriteSize/2 && y <= boty + bot.spriteSize/2) {
+            bot.dead = true;
+        }
+    }
 }
 
 void Map::readKeyboardInputs() {
     sf::Event event;
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Up) {
-                botForward = true;
-            }
-            if (event.key.code == sf::Keyboard::Down) {
-                botBackward = true;
-            }
-            if (event.key.code == sf::Keyboard::Left) {
-                botLeft = true;
-            }
-            if (event.key.code == sf::Keyboard::Right) {
-                botRight = true;
-            }
-            if (event.key.code == sf::Keyboard::M) {
-                Bullet *b = new Bullet(bot.getX(), bot.getY(), bot.getTheta());
-                bullets.push_back(b);
+            if (!bot.dead) {
+                if (event.key.code == sf::Keyboard::Up) {
+                    botForward = true;
+                }
+                if (event.key.code == sf::Keyboard::Down) {
+                    botBackward = true;
+                }
+                if (event.key.code == sf::Keyboard::Left) {
+                    botLeft = true;
+                }
+                if (event.key.code == sf::Keyboard::Right) {
+                    botRight = true;
+                }
+                if (event.key.code == sf::Keyboard::M) {
+                    Bullet *b = new Bullet(bot.getX(), bot.getY(), bot.getTheta());
+                    bullets.push_back(b);
+                }
             }
             if (event.key.code == sf::Keyboard::P) {
                 std::cout << "Bot X: " << bot.getX() << std::endl;
@@ -82,16 +102,24 @@ void Map::readKeyboardInputs() {
                 std::cout << "Bot Theta: " << bot.getTheta() << std::endl << std::endl;
             }
         } else if (event.type == sf::Event::KeyReleased) {
-            if (event.key.code == sf::Keyboard::Up) {
+            if (!bot.dead) {
+                if (event.key.code == sf::Keyboard::Up) {
+                    botForward = false;
+                }
+                if (event.key.code == sf::Keyboard::Down) {
+                    botBackward = false;
+                }
+                if (event.key.code == sf::Keyboard::Left) {
+                    botLeft = false;
+                }
+                if (event.key.code == sf::Keyboard::Right) {
+                    botRight = false;
+                }
+            }
+            else {
                 botForward = false;
-            }
-            if (event.key.code == sf::Keyboard::Down) {
                 botBackward = false;
-            }
-            if (event.key.code == sf::Keyboard::Left) {
                 botLeft = false;
-            }
-            if (event.key.code == sf::Keyboard::Right) {
                 botRight = false;
             }
         }

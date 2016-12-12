@@ -8,6 +8,8 @@
 #include "DE2Bot.h"
 #include "Wall.h"
 #include "Bullet.h"
+#include <iostream>
+#include <SFML/Network.hpp>
 
 class Map {
 public:
@@ -24,10 +26,12 @@ private:
     bool botBackward = false;
     bool botRight = false;
     bool botLeft = false;
+    bool shot = false;
     std::vector<Wall*> walls;
     std::vector<Bullet*> bullets;
     sf::Color background;
-
+    sf::TcpSocket socket;
+    sf::TcpListener listener;
     void readKeyboardInputs();
     void processInputs();
 
@@ -42,4 +46,9 @@ private:
     void checkBulletTopCollision(Bullet* b);
     void checkBulletRightCollision(Bullet* b);
     void checkBulletLeftCollision(Bullet* b);
+
+    void startServer();
+    void startClient();
+    void receive();
+    void send();
 };

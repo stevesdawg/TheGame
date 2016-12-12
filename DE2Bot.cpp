@@ -2,6 +2,7 @@
 // Created by shrivathsav on 12/8/16.
 //
 
+#include <math.h>
 #include "DE2Bot.h"
 
 DE2Bot::DE2Bot() {
@@ -53,7 +54,6 @@ void DE2Bot::setNumWalls(int num) {
         topHits.push_back(false);
         bottomHits.push_back(false);
     }
-
 }
 
 float DE2Bot::getX() {

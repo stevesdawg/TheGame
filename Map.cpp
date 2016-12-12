@@ -40,10 +40,12 @@ void Map::drawObjects() {
     }
     if (bullets.size() > 0) {
         for (Bullet* b : bullets) {
-            float bulletXStep = 5;
-            float bulletYStep = 5;
-            b->move(bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
-                   bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
+            b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
+                   b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
+            checkBulletTopCollision(b);
+            checkBulletRightCollision(b);
+            checkBulletLeftCollision(b);
+            checkBulletBottomCollision(b);
             b->draw(*window);
         }
     }
@@ -95,16 +97,86 @@ void Map::readKeyboardInputs() {
     }
 }
 
+void Map::checkBulletBottomCollision(Bullet* b) {
+    for (int i = 0; i < walls.size(); i++) {
+        Wall* w = walls[i];
+        sf::RectangleShape* rect = w->getRectangle();
+        float wx = w->getX();
+        float wy = w->getY();
+        float x = b->getX();
+        float y = b->getY();
+        float tolerance = 5;
+        if (std::abs((y - b->bulletRadius) - (wy + w->getLength())) <= tolerance && wx <= (x + b->bulletRadius) &&
+            wx + w->getWidth() >= (x - b->bulletRadius/2)) {
+            rect->setFillColor(sf::Color::Red);
+            b->bulletYStep *= -1;
+        }
+    }
+}
+
+void Map::checkBulletLeftCollision(Bullet *b) {
+    for (int i = 0; i < walls.size(); i++) {
+        Wall *w = walls[i];
+        sf::RectangleShape *rect = w->getRectangle();
+        float wx = w->getX();
+        float wy = w->getY();
+        float x = b->getX();
+        float y = b->getY();
+        float tolerance = 5;
+        // check if hit left side of wall:
+        if (std::abs((x + b->bulletRadius) - wx) <= tolerance && wy <= (y + b->bulletRadius) && wy + w->getLength() >= (y - b->bulletRadius)) {
+            rect->setFillColor(sf::Color::Blue);
+            b->bulletXStep *= -1;
+        }
+    }
+}
+
+void Map::checkBulletRightCollision(Bullet *b) {
+    for (int i = 0; i < walls.size(); i++) {
+        Wall *w = walls[i];
+        sf::RectangleShape *rect = w->getRectangle();
+        float wx = w->getX();
+        float wy = w->getY();
+        float x = b->getX();
+        float y = b->getY();
+        float tolerance = 5;
+        // check if hit right side of wall:
+        if (std::abs((x - b->bulletRadius) - (wx + w->getWidth())) <= tolerance && wy <= (y + b->bulletRadius) &&
+            wy + w->getLength() >= (y - b->bulletRadius)) {
+            rect->setFillColor(sf::Color::Cyan);
+            b->bulletXStep *= -1;
+        }
+    }
+}
+
+void Map::checkBulletTopCollision(Bullet *b) {
+    for (int i = 0; i < walls.size(); i++) {
+        Wall *w = walls[i];
+        sf::RectangleShape *rect = w->getRectangle();
+        float wx = w->getX();
+        float wy = w->getY();
+        float x = b->getX();
+        float y = b->getY();
+        float tolerance = 5;
+        // check if hit top side of wall:
+        if (std::abs((y + b->bulletRadius) - wy) <= tolerance && wx <= (x + b->bulletRadius) &&
+            wx + w->getWidth() >= (x - b->bulletRadius)) {
+            rect->setFillColor(sf::Color::Magenta);
+            b->bulletYStep *= -1;
+        }
+    }
+}
+
 void Map::processInputs() {
     float theta = bot.getTheta();
     const float standardXStep = xStep * (float) cos(theta * M_PI / 180);
     const float standardYStep = yStep * (float) sin(theta * M_PI / 180);
     float dx = standardXStep;
     float dy = standardYStep;
-    checkBottomCollision(&dx, &dy);
-    checkRightCollision(&dx, &dy);
-    checkTopCollision(&dx, &dy);
-    checkLeftCollision(&dx, &dy);
+    checkBotBottomCollision();
+    checkBotRightCollision();
+    checkBotTopCollision();
+    checkBotLeftCollision();
     if (botForward) {
         if (bot.hasHitLeft()) { // NO NEED TO CHECK CORNERS!!!
             dy = standardYStep;
@@ -142,9 +214,15 @@ void Map::processInputs() {
                 }
             } else if (bot.hasHitLeft()) { // hit bottom right corner
                 std::cout << "HIT BOTTOM RIGHT CORNER!" << std::endl;
-                if (theta <= 270 && theta >= 180) {
+                if (theta >= 90) {
                     dx = standardXStep;
-                    dy = standardYStep;
+                    dy = 0;
+                    if (theta >= 180) {
+                        dy = standardYStep;
+                    }
+                    if (theta >= 270) {
+                        dx = 0;
+                    }
                 } else {
                     dx = 0;
                     dy = 0;
@@ -161,18 +239,30 @@ void Map::processInputs() {
         if (bot.hasHitBottom()) { // hit a wall from below
             if (bot.hasHitRight()) { // hit top left corner
                 std::cout << "HIT TOP LEFT CORNER!" << std::endl;
-                if (theta >= 0 && theta <= 90) {
+                if (theta <= 180) {
                     dy = standardYStep;
-                    dx = standardXStep;
+                    dx = 0;
+                    if (theta <= 90) {
+                        dx = standardXStep;
+                    }
                 } else {
                     dy = 0;
                     dx = 0;
+                    if (theta >= 270) {
+                        dx = standardXStep;
+                    }
                 }
             } else if (bot.hasHitLeft()) { // hit top right corner
                 std::cout << "HIT TOP RIGHT CORNER!" << std::endl;
-                if (theta >= 90 && theta <= 180) {
-                    dy = standardYStep;
+                if (theta <= 270) {
                     dx = standardXStep;
+                    dy = 0;
+                    if (theta <= 180) {
+                        dy = standardYStep;
+                    }
+                    if (theta <= 90) {
+                        dx = 0;
+                    }
                 } else {
                     dy = 0;
                     dx = 0;
@@ -208,21 +298,33 @@ void Map::processInputs() {
         if (bot.hasHitTop()) { // hit a wall from top
             if (bot.hasHitRight()) { // hit bottom left corner
                 std::cout << "HIT BOTTOM LEFT CORNER!" << std::endl;
-                if (theta <= 180 && theta >= 90) {
+                if (theta <= 270) {
                     dx = standardXStep;
-                    dy = standardYStep;
+                    dy = 0;
+                    if (theta <= 180) {
+                        dy = standardYStep;
+                    }
+                    if (theta <= 90) {
+                        dx = 0;
+                    }
                 } else {
                     dx = 0;
                     dy = 0;
                 }
             } else if (bot.hasHitLeft()) { // hit bottom right corner
                 std::cout << "HIT BOTTOM RIGHT CORNER!" << std::endl;
-                if (theta <= 90) {
-                    dx = standardXStep;
+                if (theta <= 180) {
+                    dx = 0;
                     dy = standardYStep;
+                    if (theta <= 90) {
+                        dx = standardXStep;
+                    }
                 } else {
                     dx = 0;
                     dy = 0;
+                    if (theta >= 270) {
+                        dx = standardXStep;
+                    }
                 }
             } else { // no corner hit
                 dx = standardXStep;
@@ -236,21 +338,33 @@ void Map::processInputs() {
         if (bot.hasHitBottom()) { // hit a wall from below
             if (bot.hasHitRight()) { // hit top left corner
                 std::cout << "HIT TOP LEFT CORNER!" << std::endl;
-                if (theta <= 270 && theta >= 180) {
+                if (theta >= 180) {
                     dy = standardYStep;
                     dx = standardXStep;
+                    if (theta >= 270) {
+                        dx = 0;
+                    }
                 } else {
                     dy = 0;
-                    dx = 0;
+                    dx = standardXStep;
+                    if (theta <= 90) {
+                        dx = 0;
+                    }
                 }
             } else if (bot.hasHitLeft()) { // hit top right corner
                 std::cout << "HIT TOP RIGHT CORNER!" << std::endl;
-                if (theta >= 270) {
+                if (theta >= 180) {
                     dy = standardYStep;
-                    dx = standardXStep;
+                    dx = 0;
+                    if (theta >= 270) {
+                        dx = standardYStep;
+                    }
                 } else {
                     dy = 0;
                     dx = 0;
+                    if (theta <= 90) {
+                        dx = standardXStep;
+                    }
                 }
             } else { // no corner
                 dx = standardXStep;
@@ -273,14 +387,13 @@ void Map::processInputs() {
     }
 }
 
-void Map::checkLeftCollision(float *dx, float *dy) {
+void Map::checkBotLeftCollision() {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
         float x = bot.getX();
         float y = bot.getY();
-        float theta = bot.getTheta();
         float tolerance = 5;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit left side of wall:
@@ -293,14 +406,13 @@ void Map::checkLeftCollision(float *dx, float *dy) {
     }
 }
 
-void Map::checkRightCollision(float *dx, float *dy) {
+void Map::checkBotRightCollision() {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
         float x = bot.getX();
         float y = bot.getY();
-        float theta = bot.getTheta();
         float tolerance = 3;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit right side of wall:
@@ -314,14 +426,13 @@ void Map::checkRightCollision(float *dx, float *dy) {
     }
 }
 
-void Map::checkTopCollision(float *dx, float *dy) {
+void Map::checkBotTopCollision() {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
         float x = bot.getX();
         float y = bot.getY();
-        float theta = bot.getTheta();
         float tolerance = 3;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit top side of wall:
@@ -334,14 +445,13 @@ void Map::checkTopCollision(float *dx, float *dy) {
     }
 }
 
-void Map::checkBottomCollision(float *dx, float *dy) {
+void Map::checkBotBottomCollision() {
     for (int i = 0; i < walls.size(); i++) {
         Wall* w = walls[i];
         float wx = w->getX();
         float wy = w->getY();
         float x = bot.getX();
         float y = bot.getY();
-        float theta = bot.getTheta();
         float tolerance = 3;
         sf::RectangleShape* rect = w->getRectangle();
         // check if hit bottom side of wall:

@@ -16,6 +16,10 @@ public:
     float getY();
     float getTheta();
 
+    float bulletXStep = 7;
+    float bulletYStep = 7;
+    const float bulletRadius = 5;
+
     void move(float dx, float dy);
     void moveTo(float newx, float newy);
     void turn(float dTheta);

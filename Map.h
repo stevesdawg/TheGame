@@ -16,6 +16,7 @@ public:
     const float xStep = 5;
     const float yStep = 5;
     const float thetaStep = 6;
+    const int numBullets = 5;
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
@@ -26,10 +27,17 @@ private:
     std::vector<Wall*> walls;
     std::vector<Bullet*> bullets;
     sf::Color background;
+
     void readKeyboardInputs();
     void processInputs();
-    void checkLeftCollision(float *dx, float *dy);
-    void checkRightCollision(float *dx, float *dy);
-    void checkTopCollision(float *dx, float *dy);
-    void checkBottomCollision(float *dx, float *dy);
+
+    void checkBotLeftCollision();
+    void checkBotRightCollision();
+    void checkBotTopCollision();
+    void checkBotBottomCollision();
+
+    void checkBulletBottomCollision(Bullet* b);
+    void checkBulletTopCollision(Bullet* b);
+    void checkBulletRightCollision(Bullet* b);
+    void checkBulletLeftCollision(Bullet* b);
 };

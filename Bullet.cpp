@@ -52,7 +52,7 @@ void Bullet::draw(sf::RenderWindow &window) {
 
 void Bullet::move(sf::RenderWindow &window) {
     sf::CircleShape c;
-    c.setRadius(10);
+    c.setRadius(bulletRadius);
     c.setPosition(x, y);
     c.setFillColor(sf::Color::Black);
     window.draw(c);

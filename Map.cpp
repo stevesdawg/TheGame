@@ -37,9 +37,10 @@ void Map::drawObjects() {
     if (bot.dead) {
         background = sf::Color::Green;
     }
-    receive();
-    readKeyboardInputs();
+
     send();
+    readKeyboardInputs();
+    receive();
     processInputs();
     bot.draw(*window);
     for (Wall *w : walls) {
@@ -519,7 +520,7 @@ void Map::receive(){
     char buffer[5];
     std::size_t received;
     socket.receive(buffer, sizeof(buffer), received);
-    std::cout << buffer << std::endl;
+    
 
 }
 

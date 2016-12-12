@@ -47,6 +47,13 @@ void DE2Bot::moveTo(float newx, float newy) {
 
 void DE2Bot::setNumWalls(int num) {
     numWalls = num;
+    for (int i = 0; i < numWalls; i++) {
+        leftHits.push_back(false);
+        rightHits.push_back(false);
+        topHits.push_back(false);
+        bottomHits.push_back(false);
+    }
+
 }
 
 float DE2Bot::getX() {

@@ -26,7 +26,7 @@ Map::Map() {
     walls.push_back(w5);
     walls.push_back(w6);
     walls.push_back(w7);
-    background = sf::Color::White;
+    background = sf::Color::Yellow;
     bot.setNumWalls(walls.size());
 }
 

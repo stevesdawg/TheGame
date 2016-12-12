@@ -42,6 +42,7 @@ private:
     float y;
     float theta;
     int numWalls;
+    bool dead = false;
 
     sf::Sprite sprite;
     sf::Texture texture;

@@ -19,6 +19,8 @@ public:
     float bulletXStep = 7;
     float bulletYStep = 7;
     const float bulletRadius = 5;
+    const sf::Time lifeTime = sf::seconds(5);
+    bool leave = false;
 
     void move(float dx, float dy);
     void moveTo(float newx, float newy);
@@ -32,4 +34,6 @@ private:
     float x;
     float y;
     float theta;
+    sf::Time creationTime;
+    sf::Clock clock;
 };

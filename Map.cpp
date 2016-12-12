@@ -39,7 +39,11 @@ void Map::drawObjects() {
         w->draw(*window);
     }
     if (bullets.size() > 0) {
-        for (Bullet* b : bullets) {
+        for (int i = 0; i < bullets.size(); i++) {
+            Bullet* b = bullets[i];
+            if (b->leave) {
+                bullets.erase(bullets.begin()+i);
+            }
             b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
                    b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
             checkBulletTopCollision(b);

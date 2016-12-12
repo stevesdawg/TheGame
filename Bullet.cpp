@@ -8,12 +8,16 @@ Bullet::Bullet() {
     x = 0;
     y = 0;
     theta = 0;
+    clock.restart();
+    creationTime = clock.getElapsedTime();
 }
 
 Bullet::Bullet(float somex, float somey, float someTheta) {
     x = somex;
     y = somey;
     theta = someTheta;
+    clock.restart();
+    creationTime = clock.getElapsedTime();
 }
 
 float Bullet::getX() {
@@ -56,4 +60,8 @@ void Bullet::move(sf::RenderWindow &window) {
     c.setPosition(x, y);
     c.setFillColor(sf::Color::Black);
     window.draw(c);
+    sf::Time stamp = clock.getElapsedTime();
+    if (stamp - creationTime >= lifeTime) {
+        leave = true;
+    }
 }

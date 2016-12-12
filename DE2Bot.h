@@ -37,6 +37,11 @@ public:
     std::deque<bool> rightHits;
     std::deque<bool> topHits;
     std::deque<bool> bottomHits;
+    bool botForward = false;
+    bool botBackward = false;
+    bool botRight = false;
+    bool botLeft = false;
+    bool shot = false;
 
 private:
     float x;

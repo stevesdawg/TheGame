@@ -34,12 +34,11 @@ Map::Map(sf::RenderWindow* wind) {
     background = sf::Color::White;
     bot.setNumWalls(walls.size());
     networkBot.setNumWalls(walls.size());
-    startServer();
 }
 
 void Map::drawObjects() {
     window->clear(background);
-    if (bot.dead) {
+    if (bot.dead || networkBot.dead) {
         background = sf::Color::Green;
     }
 //
@@ -60,8 +59,9 @@ void Map::drawObjects() {
                 if (b->leave) {
                     bullets.erase(bullets.begin() + i);
                 }
-                checkBulletHit(b, &bot);
-                checkBulletHit(b, &networkBot);
+                //checkBulletHitNetworkBot(b);
+                //checkBulletHitBot(b);
+
                 b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
                         b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
                 checkBulletTopCollision(b);
@@ -75,16 +75,35 @@ void Map::drawObjects() {
     window->display();
 }
 
-void Map::checkBulletHit(Bullet* b, DE2Bot* bot) {
-    if (b->hasClearedBot(bot)) { // bullet is now active
+void Map::checkBulletHitBot(Bullet* b) {
+    if (b->hasClearedBot(&bot)) { // bullet is now active
         float x = b->getX();
         float y = b->getY();
-        float botx = bot->getX();
-        float boty = bot->getY();
-        if (x >= botx - bot->spriteSize/2 && x <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2) {
-            bot->dead = true;
+        float botx = bot.getX();
+        float boty = bot.getY();
+        if (x >= botx - bot.spriteSize/2 && x <= botx + bot.spriteSize/2 && y >= boty - bot.spriteSize/2 && y <= boty + bot.spriteSize/2) {
+            bot.dead = true;
 
         }
+    }
+    else {
+        bot.dead = false;
+    }
+}
+
+void Map::checkBulletHitNetworkBot(Bullet* b) {
+    if (b->hasClearedBot(&networkBot)) { // bullet is now active
+        float x = b->getX();
+        float y = b->getY();
+        float botx = networkBot.getX();
+        float boty = networkBot.getY();
+        if (x >= botx - networkBot.spriteSize/2 && x <= botx + networkBot.spriteSize/2 && y >= boty - networkBot.spriteSize/2 && y <= boty + networkBot.spriteSize/2) {
+            networkBot.dead = true;
+
+        }
+    }
+    else {
+        networkBot.dead = false;
     }
 }
 
@@ -118,6 +137,7 @@ void Map::readKeyboardInputs() {
                     bot.botRight = true;
                 }
                 if (event.key.code == sf::Keyboard::M) {
+                    counter ++;
                     bot.shot = true;
                 }
             }
@@ -531,7 +551,7 @@ void Map::checkBotBottomCollision(DE2Bot* bot) {
 }
 void Map::startServer(){
 
-    listener.listen(2000);
+    listener.listen(2001);
     listener.accept(socket);
 }
 
@@ -541,7 +561,7 @@ void Map::startClient(){
 }
 
 void Map::receive(){
-    char buffer[6];
+    char buffer[7];
     std::size_t received;
     socket.receive(buffer, sizeof(char)*6, received);
 
@@ -576,12 +596,18 @@ void Map::receive(){
     else{
         networkBot.shot = false;
     }
+    if (buffer[5] == '1'){
+        bot.dead = true;
+    }
+    else{
+        bot.dead = false;
+    }
 
 
 }
 
 void Map::send() {
-    char sendArr[6];
+    char sendArr[7];
     if (bot.botForward){
         sendArr[0] = '1';
     }
@@ -613,7 +639,14 @@ void Map::send() {
     else{
         sendArr[4] = '0';
     }
-    sendArr[5] = '\0';
+    if (counter > 100){
+        sendArr[5] = '1';
+        networkBot.dead = true;
+    }
+    else{
+        sendArr[5] = '0';
+    }
+    sendArr[6] = '\0';
     socket.send(sendArr, sizeof(char)*6);
 
 }

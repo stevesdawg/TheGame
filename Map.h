@@ -16,6 +16,8 @@ public:
     const float yStep = 5;
     const float thetaStep = 6;
     int whoDied();
+    void startServer();
+    int counter = 0;
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
@@ -28,19 +30,19 @@ private:
     void readKeyboardInputs();
     void processInputs(DE2Bot* bot);
 
-    void checkBulletHit(Bullet* b, DE2Bot* bot);
+    void checkBulletHitBot(Bullet* b);
+    void checkBulletHitNetworkBot(Bullet* b);
 
     void checkBotLeftCollision(DE2Bot* bot);
     void checkBotRightCollision(DE2Bot* bot);
     void checkBotTopCollision(DE2Bot* bot);
     void checkBotBottomCollision(DE2Bot* bot);
-
     void checkBulletBottomCollision(Bullet* b);
     void checkBulletTopCollision(Bullet* b);
     void checkBulletRightCollision(Bullet* b);
     void checkBulletLeftCollision(Bullet* b);
 
-    void startServer();
+
     void startClient();
     void receive();
     void send();

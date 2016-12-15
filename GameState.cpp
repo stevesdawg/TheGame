@@ -8,7 +8,7 @@
 GameState::GameState()
 {
     window = new sf::RenderWindow(sf::VideoMode(1440, 1080), "TheGameModified");
-
+    m = new Map(window);
 }
 
 void GameState::mainFunc(){
@@ -33,6 +33,7 @@ void GameState::mainFunc(){
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::A) {
                     s = GAME;
+                    m->startServer();
 
                 }
             }
@@ -108,37 +109,43 @@ void GameState::gameOverMe(){
     sf::Font font;
     sf::Text text;
     text.setColor(sf::Color::White);
-    sf::Color color = sf::Color::White;
+    sf::Color color = sf::Color::Black;
     font.loadFromFile("arial.ttf");
     text.setFont(font);
     window->clear(color);
     text.setString("Game Over. You lost :(");
     window->draw(text);
-    window->display();
+
     sf::Text text2;
     text2.setColor(sf::Color::White);
     text2.setFont(font);
     std::string printme = std::to_string(myScore);
     std::string printu = std::to_string(uScore);
-    text2.setString("My score is: " + printme + "Player 2's score is " + printu + ".");
+    text2.setString("My score is: " + printu + " Player 2's score is " + printme + ". ");
+    text2.move(0,50);
+    window->draw(text2);
+    window->display();
 }
 void GameState::gameOverU(){
     sf::Font font;
     sf::Text text;
     text.setColor(sf::Color::White);
-    sf::Color color = sf::Color::White;
+    sf::Color color = sf::Color::Black;
     font.loadFromFile("arial.ttf");
     text.setFont(font);
     window->clear(color);
     text.setString("Game Over. You won!");
     window->draw(text);
-    window->display();
+
     sf::Text text2;
     text2.setColor(sf::Color::White);
     text2.setFont(font);
     std::string printme = std::to_string(myScore);
     std::string printu = std::to_string(uScore);
-    text2.setString("My score is: " + printme + "Player 2's score is " + printu + ".");
+    text2.setString("My score is: " + printu  + " Player 2's score is " +  printme + ". Press A to restart.");
+    text2.move(0,50);
+    window->draw(text2);
+    window->display();
 }
 
 

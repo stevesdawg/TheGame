@@ -19,7 +19,7 @@ public:
 
 private:
     sf::RenderWindow* window;
-    Map *m = new Map(window);
+    Map *m ;
     enum STATE{
         TITLE, STORY, GAME, GAME_OVERME, GAME_OVERU
     };

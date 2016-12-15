@@ -14,6 +14,7 @@ set(SOURCE_FILES
         Wall.h Wall.cpp Bullet.cpp Bullet.h main2.cpp GameState.cpp GameState.h)
 #copy file to where my executable is
 file(COPY "content/arial.ttf" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "content/botSprite.png" DESTINATION "${CMAKE_BINARY_DIR}")
 
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})

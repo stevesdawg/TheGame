@@ -49,7 +49,7 @@ void Map::drawObjects() {
     for (Wall *w : walls) {
         w->draw(*window);
     }
-    if (!bot.dead) {
+    if (!bot.dead && !networkBot.dead) {
         if (bullets.size() > 0) {
             for (int i = 0; i < bullets.size(); i++) {
                 Bullet *b = bullets[i];
@@ -553,11 +553,16 @@ void Map::receive() {
         } else {
             networkBot.shot = false;
         }
+        if (buffer[5] == '1') {
+            networkBot.dead = true;
+        } else {
+            networkBot.dead = false;
+        }
     }
 }
 
 void Map::send() {
-    char data[6];
+    char data[7];
     if (bot.botForward) {
         data[0] = '1';
     } else {
@@ -583,5 +588,11 @@ void Map::send() {
     } else {
         data[4] = '0';
     }
-    socket.send(data, sizeof(char) * 6);
+    if (bot.dead) {
+        data[5] = '1';
+    } else {
+        data[5] = '0';
+    }
+    data[6] = '\0';
+    socket.send(data, sizeof(char) * 7);
 }

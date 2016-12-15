@@ -11,7 +11,7 @@
 //
 //int main()
 //{
-//    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+////    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
 //    sf::TcpSocket socket;
 //    char connectionType, mode;
 //    char buffer[2000];

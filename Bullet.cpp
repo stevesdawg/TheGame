@@ -50,17 +50,16 @@ void Bullet::turnTo(float newTheta) {
     theta = newTheta;
 }
 
-bool Bullet::justLaunched(DE2Bot* bot) {
+bool Bullet::hasClearedBot(DE2Bot *bot) {
     if (hasLeftBot) {
-        return !hasLeftBot;
+        return hasLeftBot;
     } else {
         float x = this->getX();
         float y = this->getY();
         float botx = bot->getX();
         float boty = bot->getY();
-        bool insideBot = (x >= botx && x - bot->spriteSize/2 <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2);
-        hasLeftBot = !insideBot;
-        return !hasLeftBot;
+        hasLeftBot = ((x >= botx + bot->spriteSize/2 || x <= botx - bot->spriteSize/2) && (y >= boty + bot->spriteSize/2 || y <= boty - bot->spriteSize/2));
+        return hasLeftBot;
     }
 }
 

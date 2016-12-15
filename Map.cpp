@@ -13,7 +13,7 @@ Map::Map() {
 
     window = new sf::RenderWindow(sf::VideoMode(1440, 1080), "TheGame");
     bot.moveTo(500, 700);
-    networkBot.moveTo(300, 300);
+//    networkBot.moveTo(300, 300);
     Wall* w = new Wall(341, 200, 10, 500);
     Wall* w2 = new Wall(341, 200, 500, 10);
     Wall* w3 = new Wall(841, 200, 10, 500);
@@ -30,8 +30,8 @@ Map::Map() {
     walls.push_back(w7);
     background = sf::Color::Yellow;
     bot.setNumWalls(walls.size());
-    networkBot.setNumWalls(walls.size());
-    startClient();
+//    networkBot.setNumWalls(walls.size());
+//    startClient();
 }
 
 void Map::drawObjects() {
@@ -39,13 +39,13 @@ void Map::drawObjects() {
     if (bot.dead) {
         background = sf::Color::Green;
     }
-    receive();
+//    receive();
     readKeyboardInputs();
-    send();
+//    send();
     processInputs(&bot);
-    processInputs(&networkBot);
+//    processInputs(&networkBot);
     bot.draw(*window);
-    networkBot.draw(*window);
+//    networkBot.draw(*window);
     for (Wall *w : walls) {
         w->draw(*window);
     }
@@ -56,7 +56,7 @@ void Map::drawObjects() {
                 if (b->leave) {
                     bullets.erase(bullets.begin() + i);
                 }
-                //checkBulletHit(b);
+                checkBulletHit(b, &bot);
                 b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
                         b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
                 checkBulletTopCollision(b);
@@ -71,12 +71,12 @@ void Map::drawObjects() {
 }
 
 void Map::checkBulletHit(Bullet* b, DE2Bot* bot) {
-    if (!b->justLaunched(bot)) {
+    if (b->hasClearedBot(bot)) { // bullet is now active
         float x = b->getX();
         float y = b->getY();
         float botx = bot->getX();
         float boty = bot->getY();
-        if (x >= botx && x - bot->spriteSize/2 <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2) {
+        if (x >= botx - bot->spriteSize/2 && x <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2) {
             bot->dead = true;
         }
     }
@@ -518,7 +518,7 @@ void Map::checkBotBottomCollision(DE2Bot* bot) {
 //}
 
 void Map::startClient(){
-    sf::IpAddress k("128.61.37.176");
+    sf::IpAddress k("128.61.33.86");
     socket.connect(k, 2000);
 }
 

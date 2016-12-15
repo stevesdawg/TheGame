@@ -1,7 +1,3 @@
-//
-// Created by shrivathsav on 12/9/16.
-//
-
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -14,11 +10,12 @@
 class Map {
 public:
     Map();
+    Map(sf::RenderWindow* window);
     void drawObjects();
     const float xStep = 5;
     const float yStep = 5;
     const float thetaStep = 6;
-    const int numBullets = 5;
+    int whoDied();
 private:
     sf::RenderWindow* window;
     DE2Bot bot;
@@ -28,16 +25,15 @@ private:
     sf::Color background;
     sf::TcpSocket socket;
     sf::TcpListener listener;
-    bool hasShot = false;
     void readKeyboardInputs();
-    void processInputs(DE2Bot*);
+    void processInputs(DE2Bot* bot);
 
-    void checkBulletHit(Bullet* b, DE2Bot*);
+    void checkBulletHit(Bullet* b, DE2Bot* bot);
 
-    void checkBotLeftCollision(DE2Bot*);
-    void checkBotRightCollision(DE2Bot*);
-    void checkBotTopCollision(DE2Bot*);
-    void checkBotBottomCollision(DE2Bot*);
+    void checkBotLeftCollision(DE2Bot* bot);
+    void checkBotRightCollision(DE2Bot* bot);
+    void checkBotTopCollision(DE2Bot* bot);
+    void checkBotBottomCollision(DE2Bot* bot);
 
     void checkBulletBottomCollision(Bullet* b);
     void checkBulletTopCollision(Bullet* b);

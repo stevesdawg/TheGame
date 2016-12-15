@@ -28,7 +28,7 @@ public:
     void moveTo(float newx, float newy);
     void turn(float dTheta);
     void turnTo(float newTheta);
-    bool justLaunched(DE2Bot* bot);
+    bool hasClearedBot(DE2Bot *bot);
 
     void move(sf::RenderWindow &window);
     void draw(sf::RenderWindow &window);

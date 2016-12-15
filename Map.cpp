@@ -9,10 +9,13 @@
 #include <iostream>
 #include "Map.h"
 
-Map::Map() {
+Map::Map(){
 
-    window = new sf::RenderWindow(sf::VideoMode(1440, 1080), "TheGame");
+}
+
+Map::Map(sf::RenderWindow* wind) {
     bot.moveTo(300, 300);
+    window = wind;
     networkBot.moveTo(500,700);
     Wall* w = new Wall(341, 200, 10, 500);
     Wall* w2 = new Wall(341, 200, 500, 10);
@@ -39,26 +42,26 @@ void Map::drawObjects() {
     if (bot.dead) {
         background = sf::Color::Green;
     }
-
+//
     send();
-    hasShot = false;
     readKeyboardInputs();
     receive();
     processInputs(&bot);
-    processInputs(&networkBot);
+   processInputs(&networkBot);
     bot.draw(*window);
-    networkBot.draw(*window);
+   networkBot.draw(*window);
     for (Wall *w : walls) {
         w->draw(*window);
     }
-    if (!bot.dead) {
+    if (!bot.dead && !networkBot.dead) {
         if (bullets.size() > 0) {
             for (int i = 0; i < bullets.size(); i++) {
                 Bullet *b = bullets[i];
                 if (b->leave) {
                     bullets.erase(bullets.begin() + i);
                 }
-                //checkBulletHit(b);
+                checkBulletHit(b, &bot);
+                checkBulletHit(b, &networkBot);
                 b->move(b->bulletXStep * (float) cos(b->getTheta() * M_PI / 180),
                         b->bulletYStep * (float) sin(b->getTheta() * M_PI / 180));
                 checkBulletTopCollision(b);
@@ -73,14 +76,27 @@ void Map::drawObjects() {
 }
 
 void Map::checkBulletHit(Bullet* b, DE2Bot* bot) {
-    if (!b->justLaunched(bot)) {
+    if (b->hasClearedBot(bot)) { // bullet is now active
         float x = b->getX();
         float y = b->getY();
         float botx = bot->getX();
         float boty = bot->getY();
-        if (x >= botx && x - bot->spriteSize/2 <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2) {
+        if (x >= botx - bot->spriteSize/2 && x <= botx + bot->spriteSize/2 && y >= boty - bot->spriteSize/2 && y <= boty + bot->spriteSize/2) {
             bot->dead = true;
+
         }
+    }
+}
+
+int Map::whoDied(){
+    if (!bot.dead  && !networkBot.dead){
+        return 0;
+    }
+    else if (bot.dead){
+        return 1;
+    }
+    else if (networkBot.dead){
+        return 2;
     }
 }
 
@@ -103,7 +119,6 @@ void Map::readKeyboardInputs() {
                 }
                 if (event.key.code == sf::Keyboard::M) {
                     bot.shot = true;
-
                 }
             }
             if (event.key.code == sf::Keyboard::P) {
@@ -127,7 +142,6 @@ void Map::readKeyboardInputs() {
                 }
                 if (event.key.code == sf::Keyboard::M) {
                     bot.shot = false;
-
                 }
             }
             else {
@@ -434,8 +448,7 @@ void Map::processInputs(DE2Bot* bot) {
     if (bot->shot) {
         Bullet *b = new Bullet(bot->getX(), bot->getY(), bot->getTheta());
         bullets.push_back(b);
-        hasShot = true;
-        //bot->shot = true;
+        bot->shot = false;
     }
 }
 

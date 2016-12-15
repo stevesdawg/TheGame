@@ -1,10 +1,10 @@
-#include "Map.h"
+#include "GameState.h"
 
 int main()
 {
-    Map m;
+    GameState g;
     while (true) {
-        m.drawObjects();
+        g.mainFunc();
     }
     return 0;
 }
